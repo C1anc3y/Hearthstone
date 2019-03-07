@@ -22,7 +22,7 @@ except ImportError:
 
 setup(
     name='Hearthstone',
-    version='0.2.16',
+    version='0.0.1',
     packages=find_packages(),
     package_data={
         '': ['*.md'],
@@ -46,7 +46,7 @@ setup(
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
-        'License :: OSI Approved :: Apache Software License',
+        'License :: MIT',
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
         'Natural Language :: Chinese (Simplified)',
