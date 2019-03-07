@@ -4,7 +4,7 @@
 @File: tests.py
 @Author: ClanceyHuang
 @Time: 19-3-6 上午9:35
-@Desc:  ...
+@Desc: 测试用例
 @Version: Python3
 """
 import logging
@@ -28,6 +28,7 @@ class Tests(unittest.TestCase):
             os.remove(path)
 
     def test_career(self):
+        """测试单个职业"""
         career = core.Career('MAGE')
         self.assertEqual(career.name, '法师')
         self.assertEqual(career.__repr__(), '<Career: 法师 (MAGE)>')
@@ -37,6 +38,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(career.name, 'Mage')
 
     def test_careers(self):
+        """测试职业合集"""
         self.assertEqual(len(core.CAREERS), 11)
         self.assertEqual(core.CAREERS.get('HUNTER').name, '猎人')
 
@@ -49,11 +51,13 @@ class Tests(unittest.TestCase):
         self.assertEqual(core.CAREERS.search('Rexxar').name, 'Hunter')
 
     def test_card(self):
+        """测试单张卡牌"""
         card = core.Cards().get('OG_134')
         self.assertEqual(card.name, '尤格-萨隆')
         self.assertEqual(card.career.name, '中立')
 
     def test_cards(self):
+        """测试卡牌合集"""
         cards = core.Cards()
         found = cards.search('萨隆', '每 施放', return_first=False)
         self.assertEqual(len(found), 1)
@@ -64,6 +68,7 @@ class Tests(unittest.TestCase):
         self.assertIsInstance(cards.search('海盗', return_first=False), list)
 
     def test_cards_update(self):
+        """测试卡牌合集更新"""
         test_path = 'p_cards_update_test.json'
 
         self.remove_if_exists(test_path)
@@ -77,6 +82,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(cards.search('兽群 呼唤', '三种').cost, 8)
 
     def test_deck(self):
+        """测试单个卡组"""
         decks = core.HSBoxDecks()
         deck = decks[10]
         self.assertIsInstance(deck.career, core.Career)
@@ -84,7 +90,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(list(deck.cards.elements())), 30)
 
     def test_hsbox_decks(self):
-
+        """测试炉石盒子卡组合集"""
         test_path = 'p_hsbox_decks_test.json'
         self.remove_if_exists(test_path)
 
@@ -123,6 +129,7 @@ class Tests(unittest.TestCase):
             last_win_rate = deck.win_rate
 
     def test_can_have(self):
+        """测试：判断一个职业是否可拥有一张卡牌"""
         cards = core.Cards()
 
         self.assertTrue(core.can_have('萨满', cards.search('叫嚣的中士')))
